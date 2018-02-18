@@ -1,0 +1,60 @@
+<html>
+    <head>
+        <script src="https://aframe.io/releases/0.7.0/aframe.min.js"></script>
+    </head>
+
+    <body>
+        <!--<script>
+            AFRAME.registerComponent('follow', {
+                schema: {
+                    target: {type: 'selector'},
+                    speed: {type: 'number'}
+                },
+                init: function () {
+                    this.directionVec3 = new THREE.Vector3();
+                },
+                tick: function (time, timeDelta) {
+                    var directionVec3 = this.directionVec3;
+                    // Grab position vectors (THREE.Vector3) from the entities' three.js objects.
+                    var targetPosition = this.data.target.object3D.position;
+                    var currentPosition = this.el.object3D.position;
+                    // Subtract the vectors to get the direction the entity should head in.
+                    directionVec3.copy(targetPosition).sub(currentPosition);
+                    // Calculate the distance.
+                    var distance = directionVec3.length();
+                    // Don't go any closer if a close proximity has been reached.
+                    if (distance < 1) { return; }
+                    // Scale the direction vector's magnitude down to match the speed.
+                    var factor = this.data.speed / distance;
+                    ['x', 'y', 'z'].forEach(function (axis) {
+                        directionVec3[axis] *= factor * (timeDelta / 1000);
+                    });
+                    // Translate the entity in the direction towards the target.
+                    this.el.setAttribute('position', {
+                        x: currentPosition.x + directionVec3.x,
+                        y: currentPosition.y + directionVec3.y,
+                        z: currentPosition.z + directionVec3.z
+                    });
+                }
+            });
+           /*
+            AFRAME.registerComponent('moveable', {
+                tick: function(){
+                    console.log(this.el.);
+                }
+            })
+            */
+        </script>-->
+
+        <a-scene>
+            <a-assets>
+                <a-asset-item id="test-obj" src="Assets/test.obj"></a-asset-item>
+                <a-asset-item id="test-mtl" src="Assets/test.mtl"></a-asset-item>
+            </a-assets>
+
+            <a-light type="point" color="#f2f2f2" position="0 2 0"></a-light>
+
+            <a-entity obj-model="obj: #test-obj; mtl: #test-mtl"></a-entity>
+        </a-scene>
+    </body>
+</html>
