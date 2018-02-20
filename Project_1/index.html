@@ -4,6 +4,45 @@
     </head>
 
     <body>
+        <script>
+            AFRAME.registerComponent('light-control', {
+                init: function () {
+                    this.el.addEventListener('click', function (evt) {
+                        // Get the main light
+                        var light_main = document.querySelector('#light_main');
+
+                        // Rotate the switch
+                        this.setAttribute('rotation', {x: -this.getAttribute('rotation').x, y: 0, z: 0});
+                        this.emit('on');
+
+                        // Toggle light
+                        light_main.setAttribute('visible', !light_main.getAttribute('visible'));
+                    });
+                }
+            });
+            AFRAME.registerComponent('fan-control', {
+                init: function () {
+                    this.el.addEventListener('click', function (evt) {
+                        // Get the fan entity
+                        var fan = document.querySelector('#fan');
+
+                        // Rotate the switch
+                        this.setAttribute('rotation', {x: -this.getAttribute('rotation').x, y: 0, z: 0});
+                        this.emit('on');
+
+                        // Toggle animation
+                        //fan.setAttribute('rotation', {x: 0, y: 30, z: 0});
+                        if (this.getAttribute('rotation').x < 0) {
+                            fan.emit('on');
+                        }
+                        else{
+                            fan.emit('off');
+                        }
+                    });
+                }
+            });
+        </script>
+
         <!--<script>
             AFRAME.registerComponent('follow', {
                 schema: {
@@ -47,14 +86,45 @@
         </script>-->
 
         <a-scene>
+            <!-- Set up assets -->
             <a-assets>
-                <a-asset-item id="test-obj" src="Assets/test.obj"></a-asset-item>
-                <a-asset-item id="test-mtl" src="Assets/test.mtl"></a-asset-item>
+                <a-asset-item id="static-obj" src="Assets/static.obj"></a-asset-item>
+                <a-asset-item id="static-mtl" src="Assets/static.mtl"></a-asset-item>
+
+                <a-asset-item id="transparent-obj" src="Assets/transparent.obj"></a-asset-item>
+
+                <a-asset-item id="fan-obj" src="Assets/fan.obj"></a-asset-item>
+                <a-asset-item id="fan-mtl" src="Assets/fan.mtl"></a-asset-item>
+
+                <a-asset-item id="dull-obj" src="Assets/dull.obj"></a-asset-item>
             </a-assets>
 
-            <a-light type="point" color="#f2f2f2" position="0 2 0"></a-light>
+            <!-- Set up camera -->
+            <a-entity camera="userHeight: 1.6" look-controls wasd-controls mouse-cursor>
+                <a-entity cursor="fuse: true; fuseTimeout: 500"
+                          position="0 0 -0.1"
+                          geometry="primitive: ring; radiusInner: 0.002; radiusOuter: 0.003"
+                          material="color: black; shader: flat">
+                </a-entity>
+            </a-entity>
 
-            <a-entity obj-model="obj: #test-obj; mtl: #test-mtl"></a-entity>
+            <!-- Set up switches -->
+            <a-entity id="switch_light" light-control geometry="primitive: box" position="0.953 1.5 -3.23" scale="0.02 0.02 0.5" rotation="-5 0 0" material="color: white"></a-entity>
+            <a-entity id="switch_fan" fan-control geometry="primitive: box" position="1.037 1.5 -3.23" scale="0.02 0.02 0.5" rotation="5 0 0" material="color: white"></a-entity>
+
+            <!-- Set up lights -->
+            <a-entity obj-model="obj: #transparent-obj" material="color: grey; transparent: true; opacity: 0.7"></a-entity>
+            <a-light id="light_main" type="point" color="#f2f2f2" position="0 2.3 0" intensity="2" visible="true"></a-light>
+            <a-light id="light_ambient" type="ambient" color="#add8e6" intensity="0.2"></a-light>
+
+            <!-- Set up fan -->
+            <a-entity id="fan" obj-model="obj: #fan-obj; mtl: #fan-mtl" rotation="0 0 0" >
+                <a-animation attribute="rotation" begin="on" to="0 360 0" dur="1000" easing="linear" repeat="indefinite" end="off"></a-animation>
+            </a-entity>
+
+            <!-- Set up static scene -->
+            <a-entity obj-model="obj: #static-obj; mtl: #static-mtl"></a-entity>
+            <a-entity obj-model="obj: #dull-obj" material="color: #080d0f; roughness: 0.8"></a-entity>
         </a-scene>
     </body>
 </html>
