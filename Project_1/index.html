@@ -70,6 +70,8 @@
                 <a-asset-item id="off-obj" src="Assets/off.obj"></a-asset-item>
 
                 <img id="space" src="Assets/space.jpg">
+                <img id="instructions" src="Assets/instructions.png">
+                <img id="move" src="Assets/move.jpg">
             </a-assets>
 
             <!-- Set up camera -->
@@ -99,6 +101,10 @@
 
             <!-- Create sky box -->
             <a-sky src="#space"></a-sky>
+
+            <!-- Create instructions -->
+            <a-image src="#instructions" position="1.013 1.595 -3.036" scale="0.3 0.3 1"></a-image>
+            <a-image src="#move" position="2.946 1.702 0" scale="1.7 0.95 1" rotation="5 -90 0"></a-image>
 
             <!-- Set up static scene -->
             <a-entity obj-model="obj: #static-obj; mtl: #static-mtl"></a-entity>
