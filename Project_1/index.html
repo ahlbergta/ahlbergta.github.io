@@ -10,6 +10,8 @@
                     this.el.addEventListener('click', function (evt) {
                         // Get the main light
                         var light_main = document.querySelector('#light_main');
+                        var light_mesh = document.querySelector('#light_mesh');
+                        var off_mesh = document.querySelector('#off_mesh');
 
                         // Rotate the switch
                         this.setAttribute('rotation', {x: -this.getAttribute('rotation').x, y: 0, z: 0});
@@ -17,6 +19,14 @@
 
                         // Toggle light
                         light_main.setAttribute('visible', !light_main.getAttribute('visible'));
+                        if (light_main.getAttribute('visible')){
+                            light_mesh.setAttribute('visible', true);
+                            off_mesh.setAttribute('visible', false);
+                        }
+                        else{
+                            off_mesh.setAttribute('visible', true);
+                            light_mesh.setAttribute('visible', false);
+                        }
                     });
                 }
             });
@@ -31,7 +41,6 @@
                         this.emit('on');
 
                         // Toggle animation
-                        //fan.setAttribute('rotation', {x: 0, y: 30, z: 0});
                         if (this.getAttribute('rotation').x < 0) {
                             fan.emit('on');
                         }
@@ -42,48 +51,6 @@
                 }
             });
         </script>
-
-        <!--<script>
-            AFRAME.registerComponent('follow', {
-                schema: {
-                    target: {type: 'selector'},
-                    speed: {type: 'number'}
-                },
-                init: function () {
-                    this.directionVec3 = new THREE.Vector3();
-                },
-                tick: function (time, timeDelta) {
-                    var directionVec3 = this.directionVec3;
-                    // Grab position vectors (THREE.Vector3) from the entities' three.js objects.
-                    var targetPosition = this.data.target.object3D.position;
-                    var currentPosition = this.el.object3D.position;
-                    // Subtract the vectors to get the direction the entity should head in.
-                    directionVec3.copy(targetPosition).sub(currentPosition);
-                    // Calculate the distance.
-                    var distance = directionVec3.length();
-                    // Don't go any closer if a close proximity has been reached.
-                    if (distance < 1) { return; }
-                    // Scale the direction vector's magnitude down to match the speed.
-                    var factor = this.data.speed / distance;
-                    ['x', 'y', 'z'].forEach(function (axis) {
-                        directionVec3[axis] *= factor * (timeDelta / 1000);
-                    });
-                    // Translate the entity in the direction towards the target.
-                    this.el.setAttribute('position', {
-                        x: currentPosition.x + directionVec3.x,
-                        y: currentPosition.y + directionVec3.y,
-                        z: currentPosition.z + directionVec3.z
-                    });
-                }
-            });
-           /*
-            AFRAME.registerComponent('moveable', {
-                tick: function(){
-                    console.log(this.el.);
-                }
-            })
-            */
-        </script>-->
 
         <a-scene>
             <!-- Set up assets -->
@@ -97,6 +64,12 @@
                 <a-asset-item id="fan-mtl" src="Assets/fan.mtl"></a-asset-item>
 
                 <a-asset-item id="dull-obj" src="Assets/dull.obj"></a-asset-item>
+
+                <a-asset-item id="bright-obj" src="Assets/bright.obj"></a-asset-item>
+
+                <a-asset-item id="off-obj" src="Assets/off.obj"></a-asset-item>
+
+                <img id="space" src="Assets/space.jpg">
             </a-assets>
 
             <!-- Set up camera -->
@@ -113,7 +86,9 @@
             <a-entity id="switch_fan" fan-control geometry="primitive: box" position="1.037 1.5 -3.23" scale="0.02 0.02 0.5" rotation="5 0 0" material="color: white"></a-entity>
 
             <!-- Set up lights -->
-            <a-entity obj-model="obj: #transparent-obj" material="color: grey; transparent: true; opacity: 0.7"></a-entity>
+            <a-entity obj-model="obj: #transparent-obj" material="color: grey; transparent: true; opacity: 0.5"></a-entity>
+            <a-entity id="light_mesh" obj-model="obj: #bright-obj" material="emissive: #ffffe0" visible="true"></a-entity>
+            <a-entity id="off_mesh" obj-model="obj: #off-obj" material="color: grey" visible="false"></a-entity>
             <a-light id="light_main" type="point" color="#f2f2f2" position="0 2.3 0" intensity="2" visible="true"></a-light>
             <a-light id="light_ambient" type="ambient" color="#add8e6" intensity="0.2"></a-light>
 
@@ -121,6 +96,9 @@
             <a-entity id="fan" obj-model="obj: #fan-obj; mtl: #fan-mtl" rotation="0 0 0" >
                 <a-animation attribute="rotation" begin="on" to="0 360 0" dur="1000" easing="linear" repeat="indefinite" end="off"></a-animation>
             </a-entity>
+
+            <!-- Create sky box -->
+            <a-sky src="#space"></a-sky>
 
             <!-- Set up static scene -->
             <a-entity obj-model="obj: #static-obj; mtl: #static-mtl"></a-entity>
