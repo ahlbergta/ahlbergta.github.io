@@ -1,5 +1,7 @@
 Project 1
 
+Video: https://github.com/ahlbergta/ahlbergta.github.io/blob/master/Project_1/demo.mp4
+
 https://github.com/ahlbergta/ahlbergta.github.io/blob/master/Project_1/Instruction.JPG?raw=true
 
 The user starts in the center of the room and can see a blue screen on the tv with instructions on how to navigate the 3D environment.
