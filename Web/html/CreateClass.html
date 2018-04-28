@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+
+    <title>Create Event</title>
+
+    <link rel="stylesheet" href="../assets/css/app.css">
+    <link rel="stylesheet" href="../assets/css/bootstrap-social.css">
+    <link rel="stylesheet" href="../assets/css/fa-brands.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="../assets/jquery.min.js"></script>
+    <script src="../assets/jquery-ui.min.js"></script>
+
+    <script src="../assets/js/scripts.js"></script>
+    <script src="../assets/js/homescool.js"></script>
+
+    <script src="//api.backendless.com/sdk/js/latest/backendless.min.js"></script>
+</head>
+
+<script>
+    var APP_ID = '41E7CE4A-EDEC-6FC2-FF34-B6CD05DAFC00';
+    var API_KEY = 'EF68F6B0-AD70-0DB8-FF34-F79D27839900';
+    Backendless.initApp(APP_ID, API_KEY);
+</script>
+
+<body class="bg-light" data-gr-c-s-loaded="true">
+
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="home.html"><img src="https://api.backendless.com/41E7CE4A-EDEC-6FC2-FF34-B6CD05DAFC00/8420C1D6-C7E6-F070-FFEF-06154CAE8500/files/web/pictures/icon-256px.png" alt="" width="64" height="64"></a>
+        </div>
+
+        <div class="navbar-collapse collapse" id="navbarCollapse" style="">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Class Schedule</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="search.html">Find Classes</a>
+                </li>
+
+            </ul>
+
+            <style>
+                h2 {
+                    position:absolute;
+                    left:440px;
+                    top:60px;
+                    color:red;
+                    font-size: 20px;
+                }
+            </style>
+
+            <h2 align="center">PLEASE DO NOT SEND YOUR CHILDREN TO CLASSES AND EVENTS HOSTED BY STRANGERS </h2>
+
+            <ul class="navbar-nav navbar-right">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="EditProfile.html">Profile</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Settings</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<div class="container"> <br><br>
+
+    <div class="py-5">
+
+        <h2 class="mb-3 text-center">Create a New Class</h2>
+        <hr class="mb-4">
+        <!--<form class="needs-validation" novalidate="">-->
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <h6>Class Name</h6>
+                <input type="text" maxlength="20" class="form-control" id="name" placeholder="Ex: Algebra I" value="" required="">
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <h6>Subject</h6>
+                <select class="form-control" id = "subject">
+                    <option>-Select-</option>
+                    <option value="Math">Math</option>
+                    <option value="Science">Science</option>
+                    <option value="English">English</option>
+                    <option value="History">History</option>
+                    <option value="Music">Music</option>
+                    <option value="Art">Art</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <h6>Location</h6>
+            <input class="form-control" maxlength="40" id="location" placeholder="1111 Mullberry Ln.">
+            <div class="invalid-feedback">
+                Please enter a valid loaction
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <h6>Grade</h6>
+                <select class="form-control" id="grade">
+                    <option>-Select-</option>
+                    <option value="k">K</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="C">College</option>
+                </select>
+            </div>
+            <div class="col-md-6 mb-3">
+                <h6>Target Age</h6>
+                <select class="form-control" id="age">
+                    <option>-Select-</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <h6>Cost</h6>
+            <input class="form-control" type="money" id="cost" step="any" placeholder="$0.00">
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <h6>Date Range: Start</h6>
+                <input type="date" id="start" class="form-control date" placeholder="MM/DD/YYYY"/>
+            </div>
+            <div class="col-md-6 mb-3">
+                <h6>End</h6>
+                <input type="date" id="end"class="form-control date" placeholder="MM/DD/YYYY"/><br/>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <h6>Frequency</h6>
+            <select class="form-control" id="frequency" list="frequencyList">
+                <option>-Select-</option>
+                <option value="Daily">Daily</option>
+                <option value="M,W,F">M, W, F</option>
+                <option value="T,TR">T, TH</option>
+            </select>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <h6>Contact</h6>
+                <h6>*Unimplemented*</h6>
+            </div>
+
+            <div class="col-md-6 mb-3">
+                <h6>Managers</h6>
+                <h6>*Unimplemented*</h6>
+
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <h6>Description</h6>
+            <textarea class="form-control" id="description" rows="3"></textarea>
+        </div>
+
+        <div class="mb-3">
+            <h6>Limitations</h6>
+            <textarea class="form-control" id="limitations" rows="3"></textarea>
+        </div>
+
+        <hr class="mb-4">
+        <br>
+
+        <button class="btn btn-primary btn-lg btn-block" onclick="saveClass()">Continue</button>
+        <script>
+            function clicked() {
+                alert("Creating class is under development")
+            }
+        </script>
+        <!--</form>-->
+    </div>
+    <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">© 2017-2018 Company Name</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Privacy</a></li>
+            <li class="list-inline-item"><a href="#">Terms</a></li>
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+</div>
+
+
+
+</body>
+
+</html>
+
+<script>
+    function saveClass()
+    {
+        var loggedInUser = Backendless.UserService.loginSync( "luke@skywalker.com", "theforce", true);  // test code: dummy login
+        // Create a new class in the database then edit that class
+        Backendless.CustomServices.invoke("Service", "NewClass").then( function( newClassID )
+        {
+            UpdateClassWithID(newClassID)
+        }).catch(function( fault )
+        {
+            alert("error: " + JSON.stringify(fault))
+        });
+    }
+    function getFromID(id)
+    {
+        return document.getElementById(id).value;
+    }
+    function UpdateClassWithID(id)
+    {
+        // Create the args to pass into EditClass service
+        var args =
+            {
+                managers: "string",
+                primaryContact: "string",
+            };
+
+        args["grade"] = getFromID("grade");
+        args["subject"] = getFromID("subject");
+        args["limitations"] = getFromID("limitations");
+        args["name"] = getFromID("name");
+        args["dateRange"] = getFromID("end").toString() + " - " + getFromID("start").toString();
+        args["objectId"] = id;
+        args["ageRange"] = getFromID("age")
+        args["cost"] = getFromID("cost");
+        args["frequency"] = getFromID("frequency");
+        args["description"] = getFromID("description");
+        args["location"] = getFromID("location");
+
+        Backendless.CustomServices.invoke("Service", "UpdateClass", args).then( function( callback ) {
+            alert(JSON.stringify(callback))
+        }).catch( function( fault ) {
+            alert(fault.message);
+        });
+        alert("Class created Successfully");
+        window.location.replace("home.html");
+    }
+</script>
